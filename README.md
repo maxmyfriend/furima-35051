@@ -25,7 +25,7 @@
 | --------------- | ---------- | ----------------------------- |
 | name            | string     | null:false                    |
 | content         | text       | null:false                    |
-| price           | integer    |                               |
+| price           | integer    | null:false                    |
 | category_id     | integer    | null:false                    |
 | status_id       | integer    | null:false                    |
 | delivery_fee_id | integer    | null:false                    |
