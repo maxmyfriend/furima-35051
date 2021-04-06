@@ -56,12 +56,27 @@ RSpec.describe Product, type: :model do
       it "商品の販売価格が300円未満だと出品できない" do
         @product.price = 299
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price is from 300 to 9,999,999")
+        expect(@product.errors.full_messages).to include("Price は半角英数字で300~9999999を記入してください")
       end
       it "商品の販売価格が9,999,999円を超えると出品できない" do
         @product.price = 10000000
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price is from 300 to 9,999,999")
+        expect(@product.errors.full_messages).to include("Price は半角英数字で300~9999999を記入してください")
+      end
+      it "商品の販売価格は全角文字では登録できないこと" do
+        @product.price = '５００'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price は半角英数字で300~9999999を記入してください")
+      end
+      it "商品の販売価格は半角英数混合では登録できないこと" do
+        @product.price = '1a1a1a'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price は半角英数字で300~9999999を記入してください")
+      end
+      it "商品の販売価格は半角英語では登録できないこと" do
+        @product.price = 'aaa'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price は半角英数字で300~9999999を記入してください")
       end
       it "紐づくユーザーが存在しないと保存できないこと" do
         @product.user = nil
