@@ -1,5 +1,5 @@
 class RecordForm
-  include ActiveModel::module
+  include ActiveModel::Model
 
   attr_accessor :user, :product, :address
   validates :user,   presence: true, foreign_key: true
