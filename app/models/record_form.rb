@@ -9,7 +9,7 @@ class RecordForm
     validates :phone_number, format: { with: /0\d{9,10}/ }
   end
   
-  validates :prefecture_id, numericality: { other_than: 0, message: 'must be selected' }
+  validates :prefecture_id, numericality: { other_than: 1, message: 'must be selected' }
   
   def save
     record = Record.create(user_id: user_id, product_id: product_id)
