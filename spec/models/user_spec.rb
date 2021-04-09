@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
 
   describe 'ユーザー新規登録' do
     context '新規登録できるとき' do
-      it 'すべての項目の入力が存在すれば登録できること'  do
+      it 'すべての項目の入力が存在すれば登録できる'  do
         expect(@user).to be_valid
       end
     end
