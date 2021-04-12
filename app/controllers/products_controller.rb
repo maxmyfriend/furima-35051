@@ -57,6 +57,6 @@ class ProductsController < ApplicationController
   end
 
   def sold_out_moving
-    redirect_to root_path if @product.records.exists?
+    redirect_to root_path if @product.record
   end
 end
