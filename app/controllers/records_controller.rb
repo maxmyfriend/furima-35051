@@ -1,5 +1,6 @@
 class RecordsController < ApplicationController
   before_action :set_product, only: [:index, :create]
+  before_action :move_to_root, only: [:index, :create]
 
   def index
     @record_form = RecordForm.new
@@ -37,4 +38,7 @@ class RecordsController < ApplicationController
     @product = Product.find(params[:product_id])
   end
 
+  def move_to_root
+    redirect_to root_path if current_user.id == @product.user.id
+  end
 end
