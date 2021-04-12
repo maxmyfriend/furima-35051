@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_product, only: [:edit, :update, :show, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
+  before_action :sold_out_moving, only: [:edit, :update]
   
   def index
     @products = Product.order('created_at DESC')
@@ -21,7 +22,6 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path if @product.records.exists?
   end
 
   def update
@@ -54,5 +54,9 @@ class ProductsController < ApplicationController
 
   def move_to_index
     redirect_to root_path if current_user.id != @product.user.id
+  end
+
+  def sold_out_moving
+    redirect_to root_path if @product.records.exists?
   end
 end
