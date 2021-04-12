@@ -2,7 +2,6 @@ class RecordsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_product, only: [:index, :create]
   before_action :move_to_root, only: [:index, :create]
-  
 
   def index
     @record_form = RecordForm.new
@@ -14,7 +13,7 @@ class RecordsController < ApplicationController
       pay_product
       @record_form.save
       redirect_to root_path
-    else  
+    else
       render :index
     end
   end
@@ -23,16 +22,16 @@ class RecordsController < ApplicationController
 
   def record_params
     params.require(:record_form).permit(
-      :prefecture_id, :post_cord, :city, :house_number, :building_name, :phone_number).merge(user_id: current_user.id, product_id: params[:product_id], token: params[:token]
-      )
+      :prefecture_id, :post_cord, :city, :house_number, :building_name, :phone_number
+    ).merge(user_id: current_user.id, product_id: params[:product_id], token: params[:token])
   end
 
   def pay_product
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
-        amount: @product.price,
-        card: record_params[:token],
-        currency: 'jpy'
+      amount: @product.price,
+      card: record_params[:token],
+      currency: 'jpy'
     )
   end
 
@@ -41,6 +40,6 @@ class RecordsController < ApplicationController
   end
 
   def move_to_root
-    redirect_to root_path if (current_user.id == @product.user.id) || (@product.records.exists?)
+    redirect_to root_path if (current_user.id == @product.user.id) || @product.records.exists?
   end
 end

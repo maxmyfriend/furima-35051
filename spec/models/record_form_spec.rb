@@ -7,7 +7,7 @@ RSpec.describe RecordForm, type: :model do
     @product = FactoryBot.create(:product)
     @record_form = FactoryBot.build(:record_form, user_id: @user.id, product_id: @product.id)
   end
-  
+
   describe '商品の購入' do
     context '商品の購入ができるとき' do
       it 'すべての項目の入力とtokenが存在すれば購入できる' do
@@ -45,7 +45,7 @@ RSpec.describe RecordForm, type: :model do
         @record_form.valid?
         expect(@record_form.errors.full_messages).to include("House number can't be blank")
       end
-      it '電話番号が空だと購入できない' do 
+      it '電話番号が空だと購入できない' do
         @record_form.phone_number = ''
         @record_form.valid?
         expect(@record_form.errors.full_messages).to include("Phone number can't be blank")
@@ -66,7 +66,7 @@ RSpec.describe RecordForm, type: :model do
         expect(@record_form.errors.full_messages).to include('Phone number is invalid')
       end
       it '商品の購入情報に紐づくユーザーが存在しないと購入できない' do
-        @record_form.user_id = nil  
+        @record_form.user_id = nil
         @record_form.valid?
         expect(@record_form.errors.full_messages).to include("User can't be blank")
       end
