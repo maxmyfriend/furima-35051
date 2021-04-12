@@ -132,13 +132,11 @@
             <%= link_to product_path(product.id) do  %>
               <div class='item-img-content' >
                 <%= image_tag product.image, class: "item-img" if product.image.attached? %>
-
-                <%# 商品が売れていればsold outを表示しましょう %>
                 <div class='sold-out'>
-                  <%# <span>Sold Out!!</span> %>
+                  <% if product.records.exists? %>
+                   <span>Sold Out!!</span> 
+                  <% end %>
                 </div>
-                <%# //商品が売れていればsold outを表示しましょう %>
-
               </div>
               <div class='item-info'>
                 <h3 class='item-name'>
