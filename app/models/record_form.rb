@@ -1,10 +1,10 @@
 class RecordForm
   
   include ActiveModel::Model
-  attr_accessor :user_id, :product_id, :prefecture_id, :post_cord, :city, :house_number, :building_name, :phone_number
+  attr_accessor :user_id, :product_id, :prefecture_id, :post_cord, :city, :house_number, :building_name, :phone_number, :token
 
   with_options presence: true do
-    validates :user_id, :product_id, :city, :house_number
+    validates :user_id, :product_id, :city, :house_number, :token
     validates :post_cord, format: { with: /\A\d{3}[-]\d{4}\z/ }
     validates :phone_number, format: { with: /0\d{9,10}/ }
   end
