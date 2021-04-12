@@ -41,6 +41,6 @@ class RecordsController < ApplicationController
   end
 
   def move_to_root
-    redirect_to root_path if current_user.id == @product.user.id
+    redirect_to root_path if (current_user.id == @product.user.id) || (@product.records.exists?)
   end
 end
