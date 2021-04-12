@@ -6,7 +6,7 @@ class RecordForm
   with_options presence: true do
     validates :user_id, :product_id, :city, :house_number, :token
     validates :post_cord, format: { with: /\A\d{3}[-]\d{4}\z/ }
-    validates :phone_number, format: { with: /0\d{9,10}/ }
+    validates :phone_number, format: { with: /[0]\d{9,10}\z/ }
   end
   
   validates :prefecture_id, numericality: { other_than: 1, message: 'must be selected' }

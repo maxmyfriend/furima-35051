@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RecordForm, type: :model do
   before do
-    sleep 0.01
+    sleep 0.3
     @user = FactoryBot.create(:user)
     @product = FactoryBot.create(:product)
     @record_form = FactoryBot.build(:record_form, user_id: @user.id, product_id: @product.id)
@@ -52,6 +52,16 @@ RSpec.describe RecordForm, type: :model do
       end
       it '電話番号が0から始まる10、11桁の半角数字でないと購入できない' do
         @record_form.phone_number = '1234567890'
+        @record_form.valid?
+        expect(@record_form.errors.full_messages).to include('Phone number is invalid')
+      end
+      it '電話番号が12桁以上だと購入できない' do
+        @record_form.phone_number = '012345678910'
+        @record_form.valid?
+        expect(@record_form.errors.full_messages).to include('Phone number is invalid')
+      end
+      it '電話番号に数字以外が混じっていると購入できない' do
+        @record_form.phone_number = '012345abcde'
         @record_form.valid?
         expect(@record_form.errors.full_messages).to include('Phone number is invalid')
       end
