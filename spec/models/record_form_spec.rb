@@ -13,6 +13,10 @@ RSpec.describe RecordForm, type: :model do
       it 'すべての項目の入力とtokenが存在すれば購入できる' do
         expect(@record_form).to be_valid
       end
+      it 'building_nameが空でも購入できる' do
+        @record_form.building_name = ''
+        expect(@record_form).to be_valid
+      end
     end
 
     context '商品の購入ができないとき' do
@@ -40,10 +44,6 @@ RSpec.describe RecordForm, type: :model do
         @record_form.house_number = ''
         @record_form.valid?
         expect(@record_form.errors.full_messages).to include("House number can't be blank")
-      end
-      it 'building_nameが空でも購入できる' do
-        @record_form.building_name = ''
-        expect(@record_form).to be_valid
       end
       it '電話番号が空だと購入できない' do 
         @record_form.phone_number = ''
