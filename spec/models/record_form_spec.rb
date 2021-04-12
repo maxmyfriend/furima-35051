@@ -10,7 +10,7 @@ RSpec.describe RecordForm, type: :model do
   
   describe '商品の購入' do
     context '商品の購入ができるとき' do
-      it 'すべての項目の入力が存在すれば購入ができる' do
+      it 'すべての項目の入力とtokenが存在すれば購入できる' do
         expect(@record_form).to be_valid
       end
     end
@@ -64,6 +64,11 @@ RSpec.describe RecordForm, type: :model do
         @record_form.product_id = nil
         @record_form.valid?
         expect(@record_form.errors.full_messages).to include("Product can't be blank")
+      end
+      it 'tokenが空だと購入できない' do
+        @record_form.token = nil
+        @record_form.valid?
+        expect(@record_form.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
