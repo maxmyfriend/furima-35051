@@ -7,7 +7,7 @@ class RecordForm
     validates :product_id
     validates :city
     validates :house_number
-    validates :credit_message
+    validates :token
     validates :post_cord
     validates :phone_number
   end
@@ -22,10 +22,4 @@ class RecordForm
                    building_name: building_name, phone_number: phone_number, record_id: record.id)
   end
 
-  private
-
-  def credit_message
-    return if token.present?
-    errors.add(:base, 'クレジットカード情報を入力してください')
-  end
 end
