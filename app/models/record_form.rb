@@ -21,5 +21,4 @@ class RecordForm
     Address.create(prefecture_id: prefecture_id, post_cord: post_cord, city: city, house_number: house_number,
                    building_name: building_name, phone_number: phone_number, record_id: record.id)
   end
-
 end

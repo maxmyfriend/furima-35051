@@ -16,17 +16,17 @@ RSpec.describe Product, type: :model do
       it '商品画像が空だと出品できない' do
         @product.image = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include("商品の画像を選択してください")
+        expect(@product.errors.full_messages).to include('商品の画像を選択してください')
       end
       it '商品名が空だと出品できない' do
         @product.name = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include("商品名を入力してください")
+        expect(@product.errors.full_messages).to include('商品名を入力してください')
       end
       it '商品の説明が空だと出品できない' do
         @product.content = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include("商品の説明を入力してください")
+        expect(@product.errors.full_messages).to include('商品の説明を入力してください')
       end
       it '商品のカテゴリーが---だと出品できない' do
         @product.category_id = 1
