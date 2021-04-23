@@ -9,12 +9,13 @@ class Product < ApplicationRecord
   belongs_to :prefecture
   belongs_to :arrival_date
 
-  validates :name, :content, :image, :price, presence: true
+  validates :name, :content, :price, presence: true
+  validates :image, presence: { message: 'を選択してください' }
   validates :category_id, :status_id, :delivery_fee_id, :prefecture_id, :arrival_date_id, numericality: {
-    other_than: 1, message: 'must be selected'
+    other_than: 1, message: 'を選択してください'
   }
 
   validates :price, numericality: {
-    only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'は半角英数字で300~9999999を記入してください'
-  }
+    only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'を正しく入力してください'
+  }, allow_blank: true
 end
